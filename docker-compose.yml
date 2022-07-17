@@ -1,0 +1,25 @@
+version : '3.8'
+
+services:
+  web:
+    build: ./services/api
+
+    expose:
+      - 8000
+
+    restart: 'always'
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
+
+  traefik:
+    image: traefik:v2.2
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - "//var/run/docker.sock://var/run/docker.sock:ro"
+      - "./:/etc/traefik"
+
+
