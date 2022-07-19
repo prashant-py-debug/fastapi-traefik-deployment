@@ -2,15 +2,15 @@
   [entryPoints.web]
     address = ":80"
 
-[api]
-    dashboard = true
-    insecure = true
+  [entryPoints.websecure]
+    address = ":443"
+
+[accessLog]
 
 [log]
     level = "DEBUG"
 
-[accessLog]
-
 [providers]
   [providers.docker]
     exposedByDefault = false
+

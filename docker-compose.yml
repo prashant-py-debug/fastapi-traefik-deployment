@@ -11,15 +11,16 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
+      - "traefik.http.routers.fastapi.rule=Host(`api.algoscale.com`)"
+   
 
   traefik:
-    image: traefik:v2.2
+    image: traefik:v2.3
     ports:
-      - 80:80
-      - 8080:8080
+      - "80:80"
+      - "443:443"
+     
     volumes:
-      - "//var/run/docker.sock://var/run/docker.sock:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./:/etc/traefik"
-
-
+      - "/certificates:/certificates/acme.json"
